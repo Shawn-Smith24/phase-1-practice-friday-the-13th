@@ -1,3 +1,7 @@
+
+let currentMovie = {}
+let blood = document.querySelector('#amount')
+
 //fetch movies 
 fetch('http://localhost:3000/movies')
     .then(resp => resp.json())
@@ -21,6 +25,8 @@ fetch('http://localhost:3000/movies')
 
     //show the details of the FIRST movie in the dataset 
     function renderOneMovie(movie){
+        currentMovie = movie
+
         let title = document.querySelector('#title')
         title.textContent = movie.title
         let year = document.getElementById('year-released')
@@ -43,11 +49,16 @@ fetch('http://localhost:3000/movies')
         console.log(movie)
     }
     
-    function handleBloodForm(){
+    function handleBloodForm(e){
         let bloodForm = document.querySelector('#blood-form')
-        bloodForm.addEventListener('submit',() => {
+        bloodForm.addEventListener('submit',(e) => {
             e.preventDefault()
-            console.log(e)
+            //grabs value of the input from user
+            const input = document.querySelector('#blood-amount').value 
+            //takes blood amount of clicked movie += by the input amount
+            console.log(currentMovie.blood_amount += parseInt(input))
+            blood.textContent = currentMovie.blood_amount
+            
         })
     }
     
